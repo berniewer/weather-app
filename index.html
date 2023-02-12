@@ -1,178 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Weather</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="src/styles.css" />
-    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <h1 id="page-title">Weather in city</h1>
-      </div>
-      <br />
-      <div class="row">
-        <div class="col input-group mb-5">
-          <form id="search-form">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Type to search cities"
-              aria-label="city"
-              aria-describedby="button-addon2"
-              id="text-input"
-            />
-            <input
-              class="btn btn-outline-secondary"
-              type="submit"
-              id="search-button"
-            />
-          </form>
-        </div>
-        <div class="col">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            id="button-location"
-          >
-            📍 Use my current location
-          </button>
-        </div>
-      </div>
-      <br />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Weather</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <link rel="stylesheet" href="src/styles.css" />
+  <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+</head>
 
-      <div
-        class="col-12 btn-group"
-        role="group"
-        aria-label="Basic radio toggle button group"
-      >
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio1"
-          autocomplete="off"
-          checked
-          id="celsius-input"
-        />
-        <label class="btn btn-outline-secondary" for="btnradio1">Celsius</label>
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio3"
-          autocomplete="off"
-          id="farenheit-input"
-        />
-        <label class="btn btn-outline-secondary" for="btnradio3"
-          >Farenheit</label
-        >
-      </div>
-
-      <br />
-      <br />
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Today</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Tomorrow</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Weekend</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link">7 Days</a>
-        </li>
-      </ul>
-
-      <br />
-      <br />
-
-      <div class="card text-bg-dark">
-        <img
-          src="images/raincloud.jpg"
-          class="card-img"
-          alt="raincloud"
-          height="350px"
-        />
-        <div class="card-img-overlay">
-          <h3 class="card-title" id="city">city</h3>
-
-          <p class="card-text-time-details" id="day">
-            day and time
-          </p>
-          <p class="card-text-date-details" id="date">
-            months and number
-          </p>
-          <br />
-
-          <p>
-            Cloudy with scattered rain showers
-          </p>
-          <p class="degree" id="degree-top">17°</p>
-          <p class="card-text"><small>Last updated 3 mins ago</small></p>
-        </div>
-      </div>
-      <br />
-      <div class="row">
-        <div class="col-3">
-          <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">06-12h</div>
-            <div class="card-body">
-              <h4 class="card-title">Morning</h4>
-              <p class="card-emoji">🌧️</p>
-              <p class="card-text">17°</p>
-              <p class="card-rain">☔ 80%</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">12-18h</div>
-            <div class="card-body">
-              <h4 class="card-title">Midday</h4>
-              <p class="card-emoji">🌧️</p>
-              <p class="card-text">16°</p>
-              <p class="card-rain">☔ 80%</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">18-22h</div>
-            <div class="card-body">
-              <h4 class="card-title">Evening</h4>
-              <p class="card-emoji">☁️</p>
-              <p class="card-text">14°</p>
-              <p class="card-rain">☔ 30%</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-3">
-          <div class="card text-bg-light mb-3" style="max-width: 18rem;">
-            <div class="card-header">22-06h</div>
-            <div class="card-body">
-              <h4 class="card-title">Night</h4>
-              <p class="card-emoji">☁️</p>
-              <p class="card-text">11°</p>
-              <p class="card-rain">☔ 15%</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <script src="src/index.js"></script>
+<body>
+  <div class="container">
+    <div class="row">
+      <h1 id="page-title">Weather in city</h1>
     </div>
-  </body>
+    <br />
+    <div class="row">
+      <div class="col input-group mb-5">
+        <form id="search-form">
+          <input type="text" class="form-control" placeholder="Type to search cities" aria-label="city"
+            aria-describedby="button-addon2" id="text-input" />
+          <input class="btn btn-outline-secondary" type="submit" id="search-button" />
+        </form>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-outline-secondary" id="button-location">
+          📍 Use my current location
+        </button>
+      </div>
+    </div>
+    <br />
+
+    <div class="col-12 btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
+        id="celsius-input" />
+      <label class="btn btn-outline-secondary" for="btnradio1">Celsius</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off" id="farenheit-input" />
+      <label class="btn btn-outline-secondary" for="btnradio3">Farenheit</label>
+    </div>
+
+    <br />
+    <br />
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">Today</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Tomorrow</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Weekend</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">7 Days</a>
+      </li>
+    </ul>
+
+    <br />
+    <br />
+
+    <div class="card text-bg-dark">
+      <img src="images/raincloud.jpg" class="card-img" alt="raincloud" height="350px" />
+      <div class="card-img-overlay">
+        <h3 class="card-title" id="city">city</h3>
+
+        <p class="card-text-time-details" id="day">
+          day and time
+        </p>
+        <p class="card-text-date-details" id="date">
+          months and number
+        </p>
+        <br />
+
+        <p>
+          Cloudy with scattered rain showers
+        </p>
+        <p class="degree" id="degree-top">17°</p>
+        <p class="card-text"><small>Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-3">
+        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header">06-12h</div>
+          <div class="card-body">
+            <h4 class="card-title">Morning</h4>
+            <p class="card-emoji">🌧️</p>
+            <p class="card-text">17°</p>
+            <p class="card-rain">☔ 80%</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header">12-18h</div>
+          <div class="card-body">
+            <h4 class="card-title">Midday</h4>
+            <p class="card-emoji">🌧️</p>
+            <p class="card-text">16°</p>
+            <p class="card-rain">☔ 80%</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header">18-22h</div>
+          <div class="card-body">
+            <h4 class="card-title">Evening</h4>
+            <p class="card-emoji">☁️</p>
+            <p class="card-text">14°</p>
+            <p class="card-rain">☔ 30%</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+          <div class="card-header">22-06h</div>
+          <div class="card-body">
+            <h4 class="card-title">Night</h4>
+            <p class="card-emoji">☁️</p>
+            <p class="card-text">11°</p>
+            <p class="card-rain">☔ 15%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        <a href="https://github.com/berniewer/weather-app"> Open source code </a> by Bernadette Werner
+      </p>
+    </footer>
+    <script src="src/index.js"></script>
+  </div>
+</body>
+
 </html>
